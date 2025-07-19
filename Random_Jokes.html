@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Jokes 😂</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient-start-light: #fbd3e9;
+            --bg-gradient-end-light: #bb377d;
+            --bg-gradient-start-dark: #2c3e50;
+            --bg-gradient-end-dark: #000000;
+            --joke-box-bg-light: white;
+            --joke-box-bg-dark: #34495e;
+            --heading-color-light: #bb377d;
+            --heading-color-dark: #8fd3f4;
+            --text-color-light: #333;
+            --text-color-dark: #ecf0f1;
+            --button-bg-light: #bb377d;
+            --button-bg-hover-light: #a42b68;
+            --button-bg-dark: #3498db;
+            --button-bg-hover-dark: #2980b9;
+            --box-shadow-light: 0 8px 16px rgba(0, 0, 0, 0.15);
+            --box-shadow-dark: 0 8px 20px rgba(0, 0, 0, 0.4);
+            --select-bg-light: white;
+            --select-bg-dark: #2c3e50;
+            --select-border-light: #bb377d;
+            --select-border-dark: #3498db;
+            --select-text-light: #333;
+            --select-text-dark: #ecf0f1;
+            --copy-message-color: #28a745;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--bg-gradient-start-dark), var(--bg-gradient-end-dark));
+        }
+
+        body.dark-mode .joke-box {
+            background: var(--joke-box-bg-dark);
+            box-shadow: var(--box-shadow-dark);
+        }
+
+        body.dark-mode h1 {
+            color: var(--heading-color-dark);
+        }
+
+        body.dark-mode #output {
+            color: var(--text-color-dark);
+        }
+
+        body.dark-mode .buttons button {
+            background-color: var(--button-bg-dark);
+        }
+
+        body.dark-mode .buttons button:hover {
+            background-color: var(--button-bg-hover-dark);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-color-dark);
+        }
+
+        body.dark-mode .category-selection select {
+            background-color: var(--select-bg-dark);
+            border-color: var(--select-border-dark);
+            color: var(--select-text-dark);
+        }
+        
+        body.dark-mode #copyMessage {
+            color: var(--text-color-dark);
+        }
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-gradient-start-light), var(--bg-gradient-end-light));
+            transition: background 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .joke-box {
+            background: var(--joke-box-bg-light);
+            padding: 30px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--box-shadow-light);
+            max-width: 550px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--heading-color-light);
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            transition: color 0.5s ease;
+        }
+
+        .category-selection {
+            margin-bottom: 10px;
+        }
+
+        .category-selection label {
+            font-size: 1rem;
+            color: var(--text-color-light);
+            margin-right: 10px;
+            transition: color 0.5s ease;
+        }
+
+        .category-selection select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--select-border-light);
+            font-size: 1rem;
+            background-color: var(--select-bg-light);
+            color: var(--select-text-light);
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+
+        #output {
+            font-size: 1.15rem;
+            color: var(--text-color-light);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            transition: color 0.5s ease, background-color 0.5s ease;
+        }
+        body.dark-mode #output {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-color: #555;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: var(--button-bg-light);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: var(--button-bg-hover-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.5s ease;
+            color: var(--text-color-light);
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        #copyMessage {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(40, 167, 69, 0.9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, bottom 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        #copyMessage.show {
+            opacity: 1;
+            bottom: -40px;
+        }
+
+        #favoriteJokesContainer {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: rgba(255, 255, 255, 0.6);
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+        body.dark-mode #favoriteJokesContainer {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-color: #555;
+        }
+
+        #favoriteJokesContainer h3 {
+            color: var(--heading-color-light);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            transition: color 0.5s ease;
+        }
+        body.dark-mode #favoriteJokesContainer h3 {
+            color: var(--heading-color-dark);
+        }
+
+        #favoriteJokesList {
+            list-style: decimal;
+            padding-left: 20px;
+            color: var(--text-color-light);
+            transition: color 0.5s ease;
+        }
+        body.dark-mode #favoriteJokesList {
+            color: var(--text-color-dark);
+        }
+
+        #favoriteJokesList li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        #favoriteJokesList li .remove-fav {
+            background: none;
+            border: none;
+            color: #dc3545;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-left: 10px;
+            padding: 0;
+            vertical-align: middle;
+            transition: color 0.2s ease;
+        }
+        #favoriteJokesList li .remove-fav:hover {
+            color: #c82333;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 600px) {
+            .joke-box {
+                padding: 20px 25px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            #output {
+                font-size: 1rem;
+                min-height: 80px;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            button {
+                width: 100%;
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                font-size: 1.5rem;
+            }
+            .category-selection {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            .category-selection select {
+                width: 100%;
+            }
+            #copyMessage.show {
+                bottom: -60px;
+            }
+        }
+    </style>
+</head>
+
+<body id="body">
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle light and dark mode">💡</button>
+
+    <div class="joke-box">
+        <h1>😂 Random Joke Generator</h1>
+
+        <div class="category-selection">
+            <label for="jokeCategory">Category:</label>
+            <select id="jokeCategory">
+                <option value="general">General Jokes</option>
+                <option value="dad">Dad Jokes</option>
+                <option value="programming">Programming Jokes</option>
+            </select>
+        </div>
+
+        <div id="output">Click "Tell Me a Joke" to get started!</div>
+        <div id="copyMessage" aria-live="polite"></div>
+
+        <div class="buttons">
+            <button id="generate">Tell Me a Joke</button>
+            <button id="copy">Copy Joke</button>
+            <button id="favorite">Add to Favorites ⭐</button>
+            <button id="speakJoke">Speak Joke 🔊</button>
+            <button id="viewFavorites">View Favorites</button>
+        </div>
+
+        <div id="favoriteJokesContainer" style="display: none;">
+            <h3>My Favorite Jokes</h3>
+            <ul id="favoriteJokesList">
+            </ul>
+            <button id="clearFavorites">Clear All Favorites</button>
+        </div>
+    </div>
+
+    <script>
+        const jokesData = {
+            general: [
+                "Why don’t scientists trust atoms? Because they make up everything!",
+                "What do you call fake spaghetti? An impasta!",
+                "Why don’t skeletons fight each other? They don’t have the guts.",
+                "Why was the math book sad? It had too many problems.",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "How do you throw a space party? You planet.",
+                "Why did the tomato blush? Because it saw the salad dressing!",
+                "Parallel lines have so much in common… it’s a shame they’ll never meet.",
+                "What’s orange and sounds like a parrot? A carrot!",
+                "Why did the bicycle fall over? Because it was two-tired!",
+                "What do you call cheese that isn’t yours? Nacho cheese!",
+                "Why can’t your nose be 12 inches long? Because then it would be a foot.",
+                "I asked the librarian if the library had any books on paranoia. She whispered, 'They’re right behind you.'",
+                "Why did the coffee file a police report? It got mugged.",
+                "I used to play piano by ear, but now I use my hands.",
+                "What do you call a snowman with a six-pack? An abdominal snowman.",
+                "Why don’t eggs tell jokes? They’d crack each other up!"
+            ],
+            dad: [
+                "I'm reading a book on anti-gravity. It's impossible to put down!",
+                "Did you hear about the restaurant on the moon? Great food, no atmosphere.",
+                "What do you call a parade of rabbits hopping backwards? A receding hare-line.",
+                "Why don't eggs tell jokes? Because they'd crack each other up!",
+                "What do you call a sad strawberry? A blueberry.",
+                "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+                "My dog used to chase people on a bike. It was so bad, we had to take his bike away.",
+                "This morning, I saw a bird successfully steal a bagel from a cafe. It was a muggle. I mean, a seagull!",
+                "Why did the invisible man turn down the job offer? He couldn't see himself doing it.",
+                "What do you call a boomerang that won't come back? A stick.",
+                "I'm so good at sleeping, I can do it with my eyes closed.",
+                "Why did the man fall into the well? Because he couldn't see that well!",
+                "What's the best thing about Switzerland? I don't know, but the flag is a big plus.",
+                "Did you hear about the power outage at the school? The students were de-lighted!",
+                "I'm on a seafood diet. I see food and I eat it."
+            ],
+            programming: [
+                "Why do programmers prefer dark mode? Because light attracts bugs.",
+                "There are 10 types of people in the world: those who understand binary, and those who don't.",
+                "Why was the JavaScript developer sad? Because he didn't Node how to Express himself.",
+                "Debugging: Removing the needles from the haystack, then realizing you put them there in the first place.",
+                "How many programmers does it take to change a light bulb? None, that's a hardware problem.",
+                "What's a programmer's favorite place to hang out? Foo Bar.",
+                "Why do programmers hate nature? It has too many trees and not enough classes.",
+                "Knock, knock. Who's there? Java. Java who? Java good time?",
+                "My code doesn't work, I have no idea why. My code works, I have no idea why.",
+                "Programmer: A machine that turns coffee into code.",
+                "What's a web developer's favorite type of music? Lo-fi.",
+                "If debugging is the process of removing software bugs, then programming must be the process of putting them in.",
+                "Why do computer scientists wear glasses? Because they can't C#."
+            ]
+        };
+
+        const generateBtn = document.getElementById("generate");
+        const output = document.getElementById("output");
+        const copyBtn = document.getElementById("copy");
+        const favoriteBtn = document.getElementById("favorite");
+        const speakJokeBtn = document.getElementById("speakJoke");
+        const viewFavoritesBtn = document.getElementById("viewFavorites");
+        const clearFavoritesBtn = document.getElementById("clearFavorites");
+        const jokeCategorySelect = document.getElementById("jokeCategory");
+        const copyMessage = document.getElementById("copyMessage");
+        const favoriteJokesContainer = document.getElementById("favoriteJokesContainer");
+        const favoriteJokesList = document.getElementById("favoriteJokesList");
+
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        let currentJoke = "";
+        let favoriteJokes = JSON.parse(localStorage.getItem('favoriteJokes')) || [];
+
+        themeToggle.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+            if (body.classList.contains("dark-mode")) {
+                themeToggle.textContent = "💡";
+                localStorage.setItem('jokeTheme', 'dark');
+            } else {
+                themeToggle.textContent = "🌙";
+                localStorage.setItem('jokeTheme', 'light');
+            }
+            updateBackgroundGradient();
+        });
+
+        function loadThemePreference() {
+            const savedTheme = localStorage.getItem('jokeTheme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.textContent = "💡";
+            } else {
+                body.classList.remove('dark-mode');
+                themeToggle.textContent = "🌙";
+            }
+            updateBackgroundGradient();
+        }
+
+        const gradientsLight = [
+            "linear-gradient(135deg, #fbd3e9, #bb377d)",
+            "linear-gradient(135deg, #a18cd1, #fbc2eb)",
+            "linear-gradient(135deg, #f6d365, #fda085)",
+            "linear-gradient(135deg, #84fab0, #8fd3f4)",
+            "linear-gradient(135deg, #c2e9fb, #a1c4fd)"
+        ];
+
+        const gradientsDark = [
+            "linear-gradient(135deg, #2c3e50, #000000)",
+            "linear-gradient(135deg, #4b6cb7, #182848)",
+            "linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b)",
+            "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+            "linear-gradient(135deg, #304352, #d7d2cc)"
+        ];
+
+        let currentGradientIndex = 0;
+        let backgroundInterval;
+
+        function updateBackgroundGradient() {
+            const gradients = body.classList.contains('dark-mode') ? gradientsDark : gradientsLight;
+            body.style.background = gradients[currentGradientIndex];
+        }
+
+        function startBackgroundRotation() {
+            if (backgroundInterval) clearInterval(backgroundInterval);
+
+            backgroundInterval = setInterval(() => {
+                const gradients = body.classList.contains('dark-mode') ? gradientsDark : gradientsLight;
+                currentGradientIndex = (currentGradientIndex + 1) % gradients.length;
+                body.style.background = gradients[currentGradientIndex];
+            }, 3000);
+        }
+
+        generateBtn.addEventListener("click", () => {
+            const category = jokeCategorySelect.value;
+            const categoryJokes = jokesData[category];
+            if (categoryJokes && categoryJokes.length > 0) {
+                const num = Math.floor(Math.random() * categoryJokes.length);
+                currentJoke = categoryJokes[num];
+                output.innerText = currentJoke;
+            } else {
+                output.innerText = "No jokes found for this category. Please select another!";
+                currentJoke = "";
+            }
+            copyBtn.innerText = "Copy Joke";
+            copyMessage.classList.remove('show');
+        });
+
+        copyBtn.addEventListener("click", () => {
+            if (currentJoke) {
+                navigator.clipboard.writeText(currentJoke).then(() => {
+                    copyMessage.textContent = "Joke Copied! 🎉";
+                    copyMessage.classList.add('show');
+                    setTimeout(() => {
+                        copyMessage.classList.remove('show');
+                    }, 1500);
+                }).catch(err => {
+                    console.error('Failed to copy joke: ', err);
+                    copyMessage.textContent = "Failed to copy joke.";
+                    copyMessage.classList.add('show');
+                    setTimeout(() => {
+                        copyMessage.classList.remove('show');
+                    }, 1500);
+                });
+            } else {
+                copyMessage.textContent = "No joke to copy!";
+                copyMessage.classList.add('show');
+                setTimeout(() => {
+                    copyMessage.classList.remove('show');
+                }, 1500);
+            }
+        });
+
+        favoriteBtn.addEventListener("click", () => {
+            if (currentJoke && !favoriteJokes.includes(currentJoke)) {
+                favoriteJokes.push(currentJoke);
+                localStorage.setItem('favoriteJokes', JSON.stringify(favoriteJokes));
+                copyMessage.textContent = "Added to Favorites! ⭐";
+                copyMessage.classList.add('show');
+                setTimeout(() => copyMessage.classList.remove('show'), 1500);
+                renderFavoriteJokes();
+            } else if (currentJoke && favoriteJokes.includes(currentJoke)) {
+                 copyMessage.textContent = "Already in Favorites!";
+                 copyMessage.classList.add('show');
+                 setTimeout(() => copyMessage.classList.remove('show'), 1500);
+            } else {
+                copyMessage.textContent = "Generate a joke first!";
+                copyMessage.classList.add('show');
+                setTimeout(() => copyMessage.classList.remove('show'), 1500);
+            }
+        });
+
+        speakJokeBtn.addEventListener("click", () => {
+            if (currentJoke && 'speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(currentJoke);
+                speechSynthesis.speak(utterance);
+            } else if (!('speechSynthesis' in window)) {
+                copyMessage.textContent = "Text-to-Speech not supported!";
+                copyMessage.classList.add('show');
+                setTimeout(() => copyMessage.classList.remove('show'), 1500);
+            } else {
+                copyMessage.textContent = "Generate a joke first to speak!";
+                copyMessage.classList.add('show');
+                setTimeout(() => copyMessage.classList.remove('show'), 1500);
+            }
+        });
+
+        viewFavoritesBtn.addEventListener("click", () => {
+            if (favoriteJokesContainer.style.display === 'none') {
+                renderFavoriteJokes();
+                favoriteJokesContainer.style.display = 'block';
+                viewFavoritesBtn.textContent = "Hide Favorites";
+            } else {
+                favoriteJokesContainer.style.display = 'none';
+                viewFavoritesBtn.textContent = "View Favorites";
+            }
+        });
+
+        function renderFavoriteJokes() {
+            favoriteJokesList.innerHTML = "";
+            if (favoriteJokes.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = "No favorite jokes yet!";
+                favoriteJokesList.appendChild(li);
+            } else {
+                favoriteJokes.forEach((joke, index) => {
+                    const li = document.createElement("li");
+                    li.textContent = joke;
+                    const removeBtn = document.createElement("button");
+                    removeBtn.textContent = "❌";
+                    removeBtn.classList.add('remove-fav');
+                    removeBtn.setAttribute('aria-label', `Remove "${joke}" from favorites`);
+                    removeBtn.onclick = () => removeFavoriteJoke(index);
+                    li.appendChild(removeBtn);
+                    favoriteJokesList.appendChild(li);
+                });
+            }
+        }
+
+        function removeFavoriteJoke(index) {
+            favoriteJokes.splice(index, 1);
+            localStorage.setItem('favoriteJokes', JSON.stringify(favoriteJokes));
+            renderFavoriteJokes();
+            copyMessage.textContent = "Joke removed from favorites.";
+            copyMessage.classList.add('show');
+            setTimeout(() => copyMessage.classList.remove('show'), 1500);
+        }
+
+        clearFavoritesBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to clear all your favorite jokes?")) {
+                favoriteJokes = [];
+                localStorage.removeItem('favoriteJokes');
+                renderFavoriteJokes();
+                copyMessage.textContent = "All favorites cleared!";
+                copyMessage.classList.add('show');
+                setTimeout(() => copyMessage.classList.remove('show'), 1500);
+            }
+        });
+
+        loadThemePreference();
+        startBackgroundRotation();
+        renderFavoriteJokes();
+    </script>
+</body>
+
+</html>
