@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUESS THE NUMBER</title>
+    <style>
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #74ebd5;
+            --accent-color: #9face6;
+            --background-card: #ffffff;
+            --text-color: #333;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --body-bg-light: linear-gradient(to right, #74ebd5, #9face6);
+            --body-bg-dark: linear-gradient(to right, #2c3e50, #000000);
+            --card-bg-light: #ffffff;
+            --card-bg-dark: #34495e;
+            --text-color-light: #333;
+            --text-color-dark: #ecf0f1;
+            --button-bg-light: #4e54c8;
+            --button-bg-dark: #3498db;
+            --input-border-light: #4e54c8;
+            --input-border-dark: #2980b9;
+        }
+
+        body.dark-mode {
+            background: var(--body-bg-dark);
+        }
+
+        body.dark-mode .game-container {
+            background-color: var(--card-bg-dark);
+            color: var(--text-color-dark);
+        }
+
+        body.dark-mode h2 {
+            color: var(--button-bg-dark);
+        }
+
+        body.dark-mode p,
+        body.dark-mode label {
+            color: var(--text-color-dark);
+        }
+
+        body.dark-mode input[type="number"] {
+            border-color: var(--input-border-dark);
+            background-color: #2c3e50;
+            color: var(--text-color-dark);
+        }
+
+        body.dark-mode input[type="number"]::placeholder {
+            color: #bdc3c7;
+        }
+
+        body.dark-mode button {
+            background-color: var(--button-bg-dark);
+        }
+
+        body.dark-mode button:hover {
+            background-color: #217dbb;
+        }
+
+        body.dark-mode select {
+            background-color: #2c3e50;
+            color: var(--text-color-dark);
+            border-color: var(--input-border-dark);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--body-bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+            transition: background 0.5s ease;
+        }
+
+        .game-container {
+            background-color: var(--card-bg-light);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+            animation: float 2s ease-in-out infinite;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: color 0.5s ease;
+        }
+
+        input[type="number"] {
+            border: 2px solid var(--input-border-light);
+            outline: none;
+            height: 45px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            padding: 0 15px;
+            text-align: center;
+            margin: 0 auto;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+        }
+
+        input[type="number"]::placeholder {
+            color: #aaa;
+        }
+
+        input.correct {
+            border-color: var(--success-color) !important;
+            box-shadow: 0 0 8px rgba(40, 167, 69, 0.4);
+        }
+
+        input.incorrect {
+            border-color: var(--error-color) !important;
+            box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: var(--button-bg-light);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #6a71e0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button:disabled {
+            background-color: #a0a0a0;
+            cursor: not-allowed;
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text-color-light);
+            margin-top: 5px;
+            transition: color 0.5s ease;
+        }
+
+        #output {
+            min-height: 25px;
+        }
+
+        #output2 {
+            min-height: 25px;
+        }
+
+        .difficulty-selection {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .difficulty-selection label {
+            font-weight: bold;
+            color: var(--text-color-light);
+            transition: color 0.5s ease;
+        }
+
+        .difficulty-selection select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--primary-color);
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+            background-color: white;
+            transition: border-color 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .difficulty-selection select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(159, 172, 230, 0.3);
+        }
+
+        #startGame {
+            margin-left: 10px;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            color: var(--text-color-light);
+            z-index: 1000;
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-color-dark);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00; /* Example color, will be randomized */
+            animation: confetti-fall 3s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translate(0, -100px) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) rotateZ(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .game-container {
+                padding: 25px;
+            }
+            input[type="number"], button {
+                width: 90%;
+            }
+            .difficulty-selection {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .difficulty-selection select, #startGame {
+                width: 100%;
+                margin-left: 0;
+            }
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle">💡</button>
+    <div class="game-container floating">
+        <h2>Guess The Number</h2>
+        <div class="difficulty-selection">
+            <label for="difficulty">Choose Range:</label>
+            <select id="difficulty">
+                <option value="10">1-10 (Easy)</option>
+                <option value="50">1-50 (Medium)</option>
+                <option value="100">1-100 (Hard)</option>
+            </select>
+            <button id="startGame">Start New Game</button>
+        </div>
+        <p id="rangeDisplay">Guess between 1 and 10</p>
+        <input id="guessInput" type="number" placeholder="Enter your guess (1-10)" min="1" max="10">
+        <button id="checkButton">Check My Guess</button>
+        <p id="output"></p>
+        <p id="output2"></p>
+        <p id="bestScore"></p>
+    </div>
+    <button id="restartButton">Restart Game</button>
+
+    <script>
+        let attemptCount = 0;
+        let maxNumber = 10;
+        let targetNumber;
+        let bestScores = JSON.parse(localStorage.getItem('guessTheNumberBestScores')) || {};
+
+        const guessInput = document.getElementById("guessInput");
+        const outputMessage = document.getElementById("output");
+        const outputAttempts = document.getElementById("output2");
+        const checkButton = document.getElementById("checkButton");
+        const restartButton = document.getElementById("restartButton");
+        const difficultySelect = document.getElementById("difficulty");
+        const startGameButton = document.getElementById("startGame");
+        const rangeDisplay = document.getElementById("rangeDisplay");
+        const bestScoreDisplay = document.getElementById("bestScore");
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        function initializeGame() {
+            attemptCount = 0;
+            maxNumber = parseInt(difficultySelect.value);
+            targetNumber = Math.floor(Math.random() * maxNumber) + 1;
+            
+            guessInput.value = "";
+            outputMessage.textContent = "";
+            outputAttempts.textContent = "";
+            checkButton.disabled = false;
+            guessInput.disabled = false;
+            guessInput.placeholder = `Enter your guess (1-${maxNumber})`;
+            guessInput.setAttribute("max", maxNumber);
+            rangeDisplay.textContent = `Guess between 1 and ${maxNumber}`;
+            
+            guessInput.classList.remove('correct', 'incorrect');
+            updateBestScoreDisplay();
+            removeConfetti();
+        }
+
+        function updateBestScoreDisplay() {
+            const currentDifficulty = difficultySelect.value;
+            if (bestScores[currentDifficulty]) {
+                bestScoreDisplay.textContent = `Best Score (${currentDifficulty}): ${bestScores[currentDifficulty]} attempts`;
+            } else {
+                bestScoreDisplay.textContent = `Best Score (${currentDifficulty}): N/A`;
+            }
+        }
+
+        function saveBestScore() {
+            const currentDifficulty = difficultySelect.value;
+            if (!bestScores[currentDifficulty] || attemptCount < bestScores[currentDifficulty]) {
+                bestScores[currentDifficulty] = attemptCount;
+                localStorage.setItem('guessTheNumberBestScores', JSON.stringify(bestScores));
+                updateBestScoreDisplay();
+            }
+        }
+
+        function triggerConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.classList.add('confetti-container');
+            document.body.appendChild(confettiContainer);
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.setProperty('--x', `${(Math.random() - 0.5) * 500}px`);
+                confetti.style.setProperty('--y', `${window.innerHeight + 100}px`);
+                confettiContainer.appendChild(confetti);
+            }
+
+            setTimeout(() => {
+                removeConfetti();
+            }, 3000); 
+        }
+
+        function removeConfetti() {
+            const existingConfetti = document.querySelector('.confetti-container');
+            if (existingConfetti) {
+                existingConfetti.remove();
+            }
+        }
+
+        checkButton.addEventListener("click", function () {
+            const guessedNumber = parseInt(guessInput.value);
+            
+            guessInput.classList.remove('correct', 'incorrect');
+
+            if (isNaN(guessedNumber)) {
+                outputMessage.textContent = "Oops! Please enter a valid number.";
+                outputAttempts.textContent = "";
+                guessInput.classList.add('incorrect');
+                return;
+            }
+
+            attemptCount++;
+
+            if (guessedNumber < 1 || guessedNumber > maxNumber) {
+                outputMessage.textContent = `Whoops! Please enter a number within the range 1-${maxNumber}.`;
+                outputAttempts.textContent = "";
+                guessInput.classList.add('incorrect');
+            } else if (guessedNumber > targetNumber) {
+                outputMessage.textContent = "Too high! Guess lower. ⬇️";
+                outputAttempts.textContent = `Attempts: ${attemptCount}`;
+                guessInput.classList.add('incorrect');
+            } else if (guessedNumber < targetNumber) {
+                outputMessage.textContent = "Too low! Guess higher. ⬆️";
+                outputAttempts.textContent = `Attempts: ${attemptCount}`;
+                guessInput.classList.add('incorrect');
+            } else {
+                outputMessage.textContent = "🎉 Congratulations! You nailed it!";
+                outputAttempts.textContent = `You took ${attemptCount} attempt${attemptCount === 1 ? '' : 's'}.`;
+                checkButton.disabled = true;
+                guessInput.disabled = true;
+                guessInput.classList.add('correct');
+                saveBestScore();
+                triggerConfetti();
+            }
+
+            guessInput.value = "";
+            guessInput.focus();
+        });
+
+        startGameButton.addEventListener("click", initializeGame);
+        restartButton.addEventListener("click", initializeGame);
+
+        themeToggle.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+            if (body.classList.contains("dark-mode")) {
+                themeToggle.textContent = "💡";
+            } else {
+                themeToggle.textContent = "🌙";
+            }
+        });
+
+        initializeGame();
+    </script>
+</body>
+</html>
