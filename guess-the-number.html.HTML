@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -254,7 +255,8 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #f00; /* Example color, will be randomized */
+            background-color: #f00;
+            /* Example color, will be randomized */
             animation: confetti-fall 3s linear forwards;
             opacity: 0;
         }
@@ -264,6 +266,7 @@
                 transform: translate(0, -100px) rotateZ(0deg);
                 opacity: 1;
             }
+
             100% {
                 transform: translate(var(--x), var(--y)) rotateZ(720deg);
                 opacity: 0;
@@ -274,9 +277,11 @@
             0% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-8px);
             }
+
             100% {
                 transform: translateY(0px);
             }
@@ -286,17 +291,23 @@
             .game-container {
                 padding: 25px;
             }
-            input[type="number"], button {
+
+            input[type="number"],
+            button {
                 width: 90%;
             }
+
             .difficulty-selection {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .difficulty-selection select, #startGame {
+
+            .difficulty-selection select,
+            #startGame {
                 width: 100%;
                 margin-left: 0;
             }
+
             .theme-toggle {
                 top: 10px;
                 right: 10px;
@@ -305,27 +316,29 @@
         }
     </style>
 </head>
+
 <body>
-    <button id="themeToggle" class="theme-toggle">💡</button>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle light and dark mode">💡</button>
     <div class="game-container floating">
         <h2>Guess The Number</h2>
         <div class="difficulty-selection">
             <label for="difficulty">Choose Range:</label>
-            <select id="difficulty">
+            <select id="difficulty" aria-label="Select difficulty level">
                 <option value="10">1-10 (Easy)</option>
                 <option value="50">1-50 (Medium)</option>
                 <option value="100">1-100 (Hard)</option>
             </select>
-            <button id="startGame">Start New Game</button>
+            <button id="startGame" aria-label="Start a new game">Start New Game</button>
         </div>
         <p id="rangeDisplay">Guess between 1 and 10</p>
-        <input id="guessInput" type="number" placeholder="Enter your guess (1-10)" min="1" max="10">
-        <button id="checkButton">Check My Guess</button>
+        <input id="guessInput" type="number" placeholder="Enter your guess (1-10)" min="1" max="10"
+            aria-label="Your guess">
+        <button id="checkButton" aria-label="Check your guess">Check My Guess</button>
         <p id="output"></p>
         <p id="output2"></p>
         <p id="bestScore"></p>
     </div>
-    <button id="restartButton">Restart Game</button>
+    <button id="restartButton" aria-label="Restart the game">Restart Game</button>
 
     <script>
         let attemptCount = 0;
@@ -349,7 +362,7 @@
             attemptCount = 0;
             maxNumber = parseInt(difficultySelect.value);
             targetNumber = Math.floor(Math.random() * maxNumber) + 1;
-            
+
             guessInput.value = "";
             outputMessage.textContent = "";
             outputAttempts.textContent = "";
@@ -358,7 +371,7 @@
             guessInput.placeholder = `Enter your guess (1-${maxNumber})`;
             guessInput.setAttribute("max", maxNumber);
             rangeDisplay.textContent = `Guess between 1 and ${maxNumber}`;
-            
+
             guessInput.classList.remove('correct', 'incorrect');
             updateBestScoreDisplay();
             removeConfetti();
@@ -399,7 +412,7 @@
 
             setTimeout(() => {
                 removeConfetti();
-            }, 3000); 
+            }, 3000);
         }
 
         function removeConfetti() {
@@ -411,7 +424,7 @@
 
         checkButton.addEventListener("click", function () {
             const guessedNumber = parseInt(guessInput.value);
-            
+
             guessInput.classList.remove('correct', 'incorrect');
 
             if (isNaN(guessedNumber)) {
@@ -464,4 +477,5 @@
         initializeGame();
     </script>
 </body>
+
 </html>
