@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Quantum Retail</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="CSS/E Commerce.css">
+</head>
+
+<body>
+    <div class="top-ticker-bar">
+        <div class="ticker-content">
+            <span>✨ Welcome to ShopEase - Your Quantum Retail Destination! ✨</span>
+            <span>🚀 Flash Sale: Get 20% OFF all Electronics this week! 🚀</span>
+            <span>🎁 New Arrivals Every Day - Discover Your Next Favorite Item! 🎁</span>
+            <span>🚚 Free Shipping on all orders over $50! Shop Now! 🚚</span>
+            <span>🌟 Don't Miss Out: Limited Time Offers on Beauty Products! 🌟</span>
+        </div>
+    </div>
+    <header>
+        <div class="menu-icon" id="menu-icon" aria-label="Open Navigation Menu">
+            <i class="fa fa-bars"></i>
+
+        </div>
+        <div class="logo" id="main-logo">ShopEase</div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search products...">
+            <button id="search-button" aria-label="Search">
+                <i class="fa fa-search"></i>
+
+            </button>
+        </div>
+        <div class="header-icons">
+            <div class="user-icon" id="user-icon" aria-label="User Account">
+                <i class="fa fa-user"></i>
+
+            </div>
+            <div class="cart-icon" id="cart-icon" aria-label="Shopping Cart">
+                <i class="fa fa-shopping-cart"></i>
+
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hidden Sidebar Navigation -->
+    <nav class="sidebar-nav" id="sidebar-nav">
+        <div class="sidebar-header">
+            <h2>Categories</h2>
+            <button class="close-sidebar" id="close-sidebar" aria-label="Close Navigation Menu">&times;</button>
+        </div>
+        <div class="filters-content">
+            <ul class="category-list">
+                <li class="category-item"><a href="#" class="active" data-category="all">All Products</a></li>
+                <li class="category-item"><a href="#" data-category="electronics">Electronics</a></li>
+                <li class="category-item"><a href="#" data-category="clothing">Clothing</a></li>
+                <li class="category-item"><a href="#" data-category="home-kitchen">Home & Kitchen</a></li>
+                <li class="category-item"><a href="#" data-category="beauty">Beauty</a></li>
+                <li class="category-item"><a href="#" data-category="sports">Sports</a></li>
+                <li class="category-item"><a href="#" data-category="books">Books</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <aside class="filters" id="static-filters">
+            <h2>Categories</h2>
+            <ul class="category-list">
+                <li class="category-item"><a href="#" class="active" data-category="all">All Products</a></li>
+                <li class="category-item"><a href="#" data-category="electronics">Electronics</a></li>
+                <li class="category-item"><a href="#" data-category="clothing">Clothing</a></li>
+                <li class="category-item"><a href="#" data-category="home-kitchen">Home & Kitchen</a></li>
+                <li class="category-item"><a href="#" data-category="beauty">Beauty</a></li>
+                <li class="category-item"><a href="#" data-category="sports">Sports</a></li>
+                <li class="category-item"><a href="#" data-category="books">Books</a></li>
+            </ul>
+        </aside>
+
+        <section class="products" id="product-grid">
+            <div class="no-items-found" id="no-items-found-message">
+                No items found matching your criteria.
+            </div>
+            <div class="product-card hidden-scroll" data-category="electronics">
+                <div class="product-image">
+                    <img src="Images/ph1.jpg" alt="Premium Smartphone X9">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Smartphone X9</h3>
+                    <div class="product-price">Rs 69,999</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card hidden-scroll" data-category="electronics">
+                <div class="product-image">
+                    <img src="Images/hp1.jpg"
+                        alt="Noise Cancelling Headphones">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Noise Cancelling Headphones</h3>
+                    <div class="product-price">Rs 2,499</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card hidden-scroll" data-category="electronics">
+                <div class="product-image">
+                    <img src="Images/wtch1.jpg" alt="Fitness Smart Watch">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Fitness Smart Watch</h3>
+                    <div class="product-price">Rs 1,799</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card hidden-scroll" data-category="home-kitchen">
+                <div class="product-image">
+                    <img src="Images/blender.jpg" alt="High-Speed Blender">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">High-Speed Blender</h3>
+                    <div class="product-price">Rs 12,999</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card hidden-scroll" data-category="sports">
+                <div class="product-image">
+                    <img src="Images/shoes.jpg" alt="Pro Running Shoes">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Pro Running Shoes</h3>
+                    <div class="product-price">Rs 8,999</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card hidden-scroll" data-category="clothing">
+                <div class="product-image">
+                    <img src="Images/bag.jpg" alt="Travel Backpack">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Travel Backpack</h3>
+                    <div class="product-price">Rs 1,599</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card hidden-scroll" data-category="beauty">
+                <div class="product-image">
+                    <img src="Images/skin.jpg" alt="Premium Skincare Set">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Skincare Set</h3>
+                    <div class="product-price">Rs 1,799</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card hidden-scroll" data-category="books">
+                <div class="product-image">
+                    <img src="Images/book.webp" alt="Bestseller Novel">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bestseller Novel</h3>
+                    <div class="product-price">Rs 1,499</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="info-section hidden-general-scroll">
+        <h2>Need Assistance?</h2>
+        <p>Our dedicated customer support team is here to help you with any queries or concerns.</p>
+        <a href="#contact">Contact Support</a> | <a href="#feedback">Leave Feedback</a>
+    </div>
+
+    <section class="info-section hidden-general-scroll" id="customer-support">
+        <h2>Customer Support</h2>
+        <p>If you have any questions about your order, products, or need technical assistance, please don't hesitate to
+            reach out to us.</p>
+        <div class="form-group">
+            <label for="support-email">Your Email</label>
+            <input type="email" id="support-email" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+            <label for="support-message">Your Message</label>
+            <textarea id="support-message" placeholder="Describe your issue or question..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="alert('Support request submitted! We will get back to you soon.');">Submit
+            Request</button>
+    </section>
+
+    <section class="info-section hidden-general-scroll" id="feedback">
+        <h2>Share Your Feedback</h2>
+        <p>We value your opinion! Help us improve by providing your valuable feedback.</p>
+        <div class="form-group">
+            <label for="feedback-name">Your Name (Optional)</label>
+            <input type="text" id="feedback-name" placeholder="Malik Talha">
+        </div>
+        <div class="form-group">
+            <label for="feedback-message">Your Feedback</label>
+            <textarea id="feedback-message" placeholder="What can we do better?"></textarea>
+        </div>
+        <button class="submit-btn" onclick="alert('Thank you for your feedback!');">Submit Feedback</button>
+    </section>
+
+    <section class="info-section hidden-general-scroll" id="contact">
+        <h2>Contact Us</h2>
+        <p>Reach out to us through the following channels:</p>
+        <p><strong>Email:</strong> support@shopease.com</p>
+        <p><strong>Phone:</strong> +92 334-1111000</p>
+        <p><strong>Address:</strong> Islamabad,Pakistan</p>
+    </section>
+
+    <footer class="hidden-general-scroll">
+        <div class="footer-links">
+            <a href="#customer-support">Customer Support</a>
+            <a href="#feedback">Feedback</a>
+            <a href="#contact">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <p>&copy; 2025 ShopEase. All rights reserved.</p>
+    </footer>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" id="close-cart" aria-label="Close Cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <div class="empty-cart-message">Your cart is empty</div>
+        </div>
+        <div class="cart-total" id="cart-total">
+            Total: $0.00
+        </div>
+        <button class="checkout-btn" id="open-checkout">Proceed to Checkout</button>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="checkout-header">
+            <h2>Checkout</h2>
+            <button class="close-checkout" id="close-checkout-modal">&times;</button>
+        </div>
+        <div class="checkout-steps">
+            <div class="checkout-step active" id="shipping-step">
+                <h3>Shipping Information</h3>
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" placeholder="123 Main St" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" placeholder="Anytown" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State/Province</label>
+                    <input type="text" id="state" placeholder="CA" required>
+                </div>
+                <div class="form-group">
+                    <label for="zip-code">Zip Code</label>
+                    <input type="text" id="zip-code" placeholder="90210" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="123-456-7890" required>
+                </div>
+            </div>
+
+            <div class="checkout-step" id="payment-step">
+                <h3>Payment Details</h3>
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" placeholder="**** **** **** ****" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-name">Name on Card</label>
+                    <input type="text" id="card-name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group" style="display: flex; gap: 1rem;">
+                    <div style="flex: 1;">
+                        <label for="exp-date">Expiration Date</label>
+                        <input type="text" id="exp-date" placeholder="MM/YY" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="***" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-step" id="summary-step">
+                <h3>Order Summary</h3>
+                <div id="order-summary-items">
+                    <!-- Order items will be dynamically inserted here -->
+                </div>
+                <div class="order-summary-total" id="order-summary-total">
+                    Total: $0.00
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-navigation">
+            <button class="prev-btn" style="display: none;">Previous</button>
+            <button class="next-btn">Next</button>
+            <button class="place-order-btn" style="display: none;">Place Order</button>
+        </div>
+    </div>
+
+    <!-- Sign In/Sign Up Modal -->
+    <div class="auth-modal" id="auth-modal">
+        <div class="auth-header">
+            <h2 id="auth-title">Sign In</h2>
+            <button class="close-auth" id="close-auth-modal">&times;</button>
+        </div>
+        <div class="auth-form" id="sign-in-form">
+            <div class="form-group">
+                <label for="signin-email">Email</label>
+                <input type="email" id="signin-email" placeholder="email@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" placeholder="********" required>
+            </div>
+            <button class="submit-btn" onclick="alert('Sign In functionality not implemented in this demo.');">Sign
+                In</button>
+        </div>
+        <div class="auth-form" id="sign-up-form" style="display: none;">
+            <div class="form-group">
+                <label for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" placeholder="email@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" placeholder="********" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-confirm-password">Confirm Password</label>
+                <input type="password" id="signup-confirm-password" placeholder="********" required>
+            </div>
+            <button class="submit-btn" onclick="alert('Sign Up functionality not implemented in this demo.');">Sign
+                Up</button>
+        </div>
+        <div class="toggle-auth-mode">
+            <span id="toggle-to-signup">Don't have an account? <a href="#">Sign Up</a></span>
+            <span id="toggle-to-signin" style="display: none;">Already have an account? <a href="#">Sign In</a></span>
+        </div>
+    </div>
+
+    <div class="global-overlay" id="global-overlay"></div>
+</body>
+<script src="JS/E Commerce.js"></script>
+
+</html>
