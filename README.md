@@ -8,11 +8,11 @@ A curated collection of **frontend development projects** built using **HTML**, 
 
 | Project                        | Description                                                                 | Live Demo |
 |-------------------------------|-----------------------------------------------------------------------------|-----------|
-| 🕒 **Digital Clock**           | A real-time clock with dynamic updating and a modern, minimalist interface. | [View Demo](https://talha-23.github.io/Frontend_Projects/CLOCK.HTML/) |
+| 🕒 **Digital Clock**           | A real-time clock with dynamic updating and a modern, minimalist interface. | [View Demo](https://talha-23.github.io/Frontend_Projects/CLOCK.HTML) |
 | ❓ **Quiz App**                | A multiple-choice quiz with score tracking and dynamic question rendering.  | [View Demo](https://talha-23.github.io/Frontend_Projects/QuizWebsite.html/) |
 | ✊🖐✌️ **Rock Paper Scissors** | A classic game with user interaction, animations, and win/loss tracking.     | [View Demo](https://muhammadtalha-1.github.io/Frontend_Projects/RockPaperScissor.html.html/) |
 | 😂 **Random Joke Generator**  | Fetches and displays random jokes using a public API.                       | [View Demo](https://talha-23.github.io/Frontend_Projects/Random_Jokes.html/) |
-| 🛒 **E-commerce Website**     | A responsive online store layout with product listings and shopping cart UI.| [View Demo]https://talha-23.github.io/Frontend_Projects/E%20Commerce.html |
+| 🛒 **E-commerce Website**     | A responsive online store layout with product listings and shopping cart UI.| [View Demo](https://talha-23.github.io/Frontend_Projects/E%20Commerce.html) |
 
 ---
 
